@@ -9,28 +9,11 @@ var buttonElement = document.querySelector('button');
 function add(a, b) {
     return a + b;
 }
-//type inference - automatically infer type for res1
-//res1 : number
-var res1 = add(2, 3);
-console.log(res1);
-// function type defined by us
-function subtract(a, b) {
-    return a - b;
-}
-// type defined by us
-var res2 = subtract(4, 2);
-// infer isTrue : boolean
-var isTrue = false;
 // void return type
 // function not returning anything has void return type in ts , while its undefined in js
 // for parameter type result : any => any is by default type if it doesnt have any other type
 function printSomething(result) {
     console.log(result);
-}
-// undefined return type
-function printVal(result) {
-    console.log(result);
-    return undefined;
 }
 buttonElement === null || buttonElement === void 0 ? void 0 : buttonElement.addEventListener('click', function () {
     var num1 = +(num1Input === null || num1Input === void 0 ? void 0 : num1Input.value); // adding plus to make it number type
@@ -58,7 +41,7 @@ buttonElement === null || buttonElement === void 0 ? void 0 : buttonElement.addE
     var resultObject3 = {
         result: result,
         print: function () {
-            console.log("result", this.result);
+            console.log("result :", this.result);
         }
     };
     results2.push(resultObject3);
