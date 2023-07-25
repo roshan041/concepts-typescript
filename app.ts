@@ -1,12 +1,5 @@
 // boolean, string, number, object , function, undefined
 
-// type HTMLElement
-// num1Input: HTMLElement | null
-// const num1Input = document.getElementById('num1');
-// const num2Input = document.getElementById('num2');
-// const buttonElement = document.querySelector('button');
-
-
 // typecasting - overrides by default infered type 
 // num1Input: HTMLInputElement
 const num1Input = document.getElementById('num1') as HTMLInputElement; // typecasting way 1
@@ -19,26 +12,6 @@ function add(a :number , b: number){
     return a+ b;
 }
 
-//type inference - automatically infer type for res1
-//res1 : number
-let res1 = add(2,3);
-console.log(res1);
-
-
-// function type defined by us
-function subtract(a :number , b: number): number{
-    return a - b;
-}
-
-// type defined by us
-const res2 : number = subtract(4,2);
-
-
-// infer isTrue : boolean
-let isTrue = false;
-
-
-
 // void return type
 // function not returning anything has void return type in ts , while its undefined in js
 // for parameter type result : any => any is by default type if it doesnt have any other type
@@ -46,17 +19,46 @@ function printSomething(result): void{
     console.log(result);
 }
 
-// undefined return type
-function printVal(result): undefined{
-    console.log(result);
-    return undefined;
-}
-
 buttonElement?.addEventListener('click',()=>{
     const num1 = +num1Input?.value; // adding plus to make it number type
     const num2 = +num2Input?.value;
 
     const result= add(num1,num2 );
-    printSomething(result);
+
+
+    // type infered - array type containing string values
+    // let arr: string[]
+    let arr = ['roshan']
+
+    // array type - array of objects where each object atleast have result of number type
+    let results1 : {result: number} []= [];
+
+    // array type - array of objects where each object atleast have result of number type
+    let results2 : {result: number, print: ()=> void} []= [];
+
+    // infered object 
+    // const resultObject1: {
+    //     result: any;
+    // }
+    const resultObject1 = {
+        result: result,
+    }
+
+    // object type
+    const resultObject2 : object = {
+        result: result,
+    }
+
+    // object type - better approach since it gives us type of values for keys in object 
+    const resultObject3 : {result: number, print : ()=> void} = {
+        result: result,
+        print(){
+            console.log("result :",this.result);
+        }
+    }
+
+    results2.push(resultObject3)
+    results2[0].print();
+    //printSomething(results2);
 
 })
