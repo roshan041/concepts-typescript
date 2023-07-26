@@ -1,4 +1,49 @@
 
+// // class
+// class User{
+//     // defining fields for class - readability for complex classes
+//     name: string;
+//     // access specifier
+//     private age: number;
+
+//     constructor(name,age){
+//         this.name= name;
+//         this.age = age;
+//     }
+// }
+
+
+// interface
+interface Greetable{
+    name: string;
+}
+
+interface Printable{
+    print: ()=>void;
+}
+//same as above but more redable
+// acting as contract for classes Printable forces User class to have print method
+class User implements Greetable, Printable{
+    constructor(public name: string, private age: number){}
+    print(){
+        console.log("print",this.name);
+    }
+}
+
+class Admin extends User {
+    constructor(name: string, age: number, private permissions : string[]){
+        super(name,age);
+    }
+    
+}
+
+// class obj
+const user = new User('roshan',22);
+
+//we can access user name from outside but not age since it is private
+console.log(user.name);
+
+
 const num1Input = document.getElementById('num1') as HTMLInputElement;
 const num2Input = <HTMLInputElement>document.getElementById('num2'); 
 const buttonElement = document.querySelector('button') as HTMLInputElement;
@@ -45,8 +90,17 @@ buttonElement?.addEventListener('click',()=>{
     // array type - array of objects where each object atleast have result of number type
     let results1 : {result: number} []= [];
 
+
+    //interface 
+    interface CalculationContainer{
+        result: number;
+        print: ()=> void;
+    }
+
+
     // array type - array of objects where each object atleast have result of number type
-    let results2 : {result: number, print: ()=> void} []= [];
+    // interface used here, acting as alternative to type here
+    let results2 : CalculationContainer []= [];
 
     // infered object 
     // const resultObject1: {
