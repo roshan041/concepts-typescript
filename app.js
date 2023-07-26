@@ -1,19 +1,31 @@
-// boolean, string, number, object , function, undefined
-// typecasting - overrides by default infered type 
-// num1Input: HTMLInputElement
-var num1Input = document.getElementById('num1'); // typecasting way 1
-var num2Input = document.getElementById('num2'); // typecasting way 2
+var num1Input = document.getElementById('num1');
+var num2Input = document.getElementById('num2');
 var buttonElement = document.querySelector('button');
-//type inference - automatically infer type of function i.e. infer parameter type and return value type
-//function add(a: number, b: number): number
 function add(a, b) {
     return a + b;
 }
-// void return type
-// function not returning anything has void return type in ts , while its undefined in js
-// for parameter type result : any => any is by default type if it doesnt have any other type
-function printSomething(result) {
-    console.log(result);
+function printSomething1(result, printMode) {
+    if (printMode === 'console') {
+        console.log("result", result);
+    }
+    else if (printMode === 'alert') {
+        alert("result ".concat(result));
+    }
+}
+// enum type
+var PrintMode2;
+(function (PrintMode2) {
+    PrintMode2[PrintMode2["CONSOLE"] = 0] = "CONSOLE";
+    PrintMode2[PrintMode2["ALERT"] = 1] = "ALERT";
+})(PrintMode2 || (PrintMode2 = {}));
+;
+function printSomething2(result, printMode) {
+    if (printMode === PrintMode2.CONSOLE) {
+        console.log("result", result);
+    }
+    else if (printMode === PrintMode2.ALERT) {
+        alert("result ".concat(result));
+    }
 }
 buttonElement === null || buttonElement === void 0 ? void 0 : buttonElement.addEventListener('click', function () {
     var num1 = +(num1Input === null || num1Input === void 0 ? void 0 : num1Input.value); // adding plus to make it number type
@@ -44,7 +56,16 @@ buttonElement === null || buttonElement === void 0 ? void 0 : buttonElement.addE
             console.log("result :", this.result);
         }
     };
+    var resultObject4 = {
+        result: result,
+        print: function () {
+            console.log("result :", this.result);
+        }
+    };
     results2.push(resultObject3);
     results2[0].print();
-    //printSomething(results2);
+    // printSomething1(10, 'console');
+    // printSomething1(10, 'alert');
+    printSomething2(20, PrintMode2.CONSOLE);
+    printSomething2(20, PrintMode2.ALERT);
 });
